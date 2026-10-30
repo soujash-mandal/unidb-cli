@@ -1,0 +1,12 @@
+{
+  "name": "unidb-cli",
+  "version": "0.1.0",
+  "description": "Official interactive command-line client for UniDB",
+  "type": "module",
+  "bin": { "unidb": "./bin/unidb.js" },
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test", "start": "node ./bin/unidb.js" },
+  "files": ["bin/", "src/", "README.md", "LICENSE"],
+  "keywords": ["unidb", "database", "cli", "sql"],
+  "license": "MIT"
+}
