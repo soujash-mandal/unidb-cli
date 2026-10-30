@@ -37,6 +37,7 @@ async function main() {
   if (process.stdin.isTTY) {
     terminal.setPrompt("unidb> ");
     terminal.prompt();
+    terminal.on("SIGINT", () => terminal.close());
   }
 
   for await (const line of terminal) {
