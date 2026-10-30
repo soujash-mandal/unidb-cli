@@ -77,6 +77,10 @@ npm pack --dry-run
 
 The CLI speaks the public UniDB line-delimited JSON connection protocol. Each request is one UTF-8 SQL statement terminated by a newline (maximum 64 KiB); each response is one JSON object terminated by a newline.
 
+## Release
+
+The release workflow runs when a GitHub Release is published. Configure the repository secret `NPM_TOKEN` with an npm automation token that can publish `unidb-cli`, then publish a GitHub Release for the package version. The workflow runs the test suite before publishing.
+
 ## Scope
 
 - UniDB Server owns database execution and storage.
