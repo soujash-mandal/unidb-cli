@@ -48,7 +48,7 @@ export class UniDBClient {
   query(sql) {
     if (!this.connected || !this.socket) return Promise.reject(new Error("Not connected to UniDB"));
     if (typeof sql !== "string" || !sql.trim()) return Promise.reject(new Error("SQL statement must not be empty"));
-    if (sql.includes("\\n") || sql.includes("\\r")) return Promise.reject(new Error("Enter one SQL statement per line"));
+    if (sql.includes("\n") || sql.includes("\r")) return Promise.reject(new Error("Enter one SQL statement per line"));
     if (Buffer.byteLength(sql, "utf8") > MAX_REQUEST_BYTES) return Promise.reject(new Error("SQL statement exceeds the 64 KiB limit"));
     return new Promise((resolve, reject) => {
       const request = { resolve, reject };
@@ -57,14 +57,14 @@ export class UniDBClient {
         this.socket?.destroy();
       }, QUERY_TIMEOUT_MS);
       this.pending.push(request);
-      this.socket.write(sql + "\\n", (error) => { if (error) this.#fail(error); });
+      this.socket.write(sql + "\n", (error) => { if (error) this.#fail(error); });
     });
   }
 
   #onData(chunk) {
     this.buffer += this.decoder.write(chunk);
     while (true) {
-      const newline = this.buffer.indexOf("\\n");
+      const newline = this.buffer.indexOf("\n");
       if (newline < 0) return;
       const line = this.buffer.slice(0, newline);
       this.buffer = this.buffer.slice(newline + 1);
