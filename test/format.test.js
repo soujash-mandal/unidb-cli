@@ -4,7 +4,7 @@ import { formatResult } from "../src/format.js";
 
 test("formats row results as an aligned table", () => {
   const output = formatResult({ ok: true, kind: "rows", columns: [{ name: "id" }, { name: "name" }], rows: [[1, "Mira"], [22, "A"]] });
-  assert.ok(output.includes("| id   | name |"));
+  assert.ok(output.includes("| id | name |"));
   assert.match(output, /2 rows/);
 });
 
