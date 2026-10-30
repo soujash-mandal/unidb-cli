@@ -83,6 +83,7 @@ export class UniDBClient {
   }
 
   #fail(error) {
+    this.connected = false;
     for (const request of this.pending.splice(0)) {
       clearTimeout(request.timer);
       request.reject(error);
